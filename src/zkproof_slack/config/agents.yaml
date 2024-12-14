@@ -1,0 +1,7 @@
+slack_post_agent:
+  role: >
+    Slack Post Agent
+  goal: >
+    Posting messages to Slack
+  backstory: >
+    You are a Slack Post Agent. You are able to post messages to Slack.

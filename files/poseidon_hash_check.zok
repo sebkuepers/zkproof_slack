@@ -1,0 +1,50 @@
+import "hashes/poseidon/poseidon" as poseidon;
+
+// -------------------------------------------------------------------
+// This ZoKrates circuit demonstrates a fundamental zero-knowledge scenario:
+// proving that a private secret (secret_credential) corresponds to a known
+// public_value via a cryptographic hash (poseidon), without revealing the secret itself.
+//
+// In the broader proof-of-concept (PoC):
+// - "secret_credential" can represent a private piece of information (like a private key component or a secret token).
+// - "public_value" is the public commitment to that secret, usually computed as poseidon(secret_credential).
+//
+// By producing a zero-knowledge proof that poseidon(secret_credential) equals public_value,
+// the prover shows they know the secret_credential corresponding to a known public_value
+// without actually disclosing the secret_credential itself.
+//
+// This mechanism can be part of a system where:
+// - A user (Issuer) grants a delegation credential by specifying a known public_value.
+// - The agent who holds the corresponding secret_credential can then prove their authority
+//   (as delegated by the user) without exposing their private data.
+//
+// Steps in a broader context:
+// 1. The user chooses secret_credential and computes its poseidon hash off-chain, obtaining public_value.
+// 2. The user issues a delegation credential referencing public_value. 
+//    (e.g., "If you know the secret corresponding to public_value, you are allowed to request posting on Slack.")
+// 3. The agent, who knows secret_credential, runs this circuit and generates a proof that poseidon(secret_credential) == public_value.
+// 4. The verifier (e.g., Slack Agent) checks the proof. If it passes, the verifier trusts the agent’s authority.
+// 5. Slack posts are then executed on behalf of the user, with privacy preserved.
+//
+// This circuit is a minimal building block. More complex circuits might:
+// - Combine multiple secrets.
+// - Enforce additional conditions (e.g., "secret_credential meets certain criteria" or "public_value matches a signature").
+//
+// For now, this simple assertion suffices to demonstrate the core zero-knowledge principle.
+// -------------------------------------------------------------------
+
+def main(private field secret_credential, field public_value) {
+    // Compute the poseidon hash of the secret_credential.
+    // poseidon is a zero-knowledge-friendly hash function, efficient for SNARKs.
+    field h = poseidon([secret_credential]);
+
+    // Assert that the computed hash matches the known public_value.
+    // If this holds true, the proof generated from this circuit will convince verifiers that:
+    // "The prover knows a secret_credential whose poseidon hash equals public_value."
+    // If this assertion fails, no valid proof can be produced.
+    assert(h == public_value);
+
+    // No explicit return needed since we only prove a constraint.
+    // If the circuit reaches this point without assertion failure, the constraints are satisfied.
+    return;
+}

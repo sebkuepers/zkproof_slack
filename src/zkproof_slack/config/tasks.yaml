@@ -1,0 +1,6 @@
+posting_task:
+  description: >
+    Post the {message} to the {channel} on Slack.
+  expected_output: >
+    The response from Slack.
+  agent: slack_post_agent
