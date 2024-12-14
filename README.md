@@ -84,7 +84,7 @@ This proof-of-concept lays out a foundational pattern for privacy-preserving del
 ### Credential Representation:
 The current “credential” is just a JSON entry mapping a public_value to actions. In a production environment, these credentials would be formal Verifiable Credentials (VCs), signed by a trusted issuer’s DID key. Such credentials, stored off-chain, would provide authenticity, integrity, and interoperability, enabling verifiers to cryptographically confirm who issued them.
 
-###DID Integration and Verification:
+### DID Integration and Verification:
 DIDs in this PoC are simple strings without actual resolution. A real system would leverage decentralized identity frameworks and DID resolvers to verify issuer DIDs and associated public keys. This DID infrastructure would generally run off-chain, while references to DID documents or VC registries might be anchored on-chain for tamper-resistant transparency.
 
 ### ZK Proof Generation and Verification:
@@ -93,7 +93,7 @@ We currently rely on manual scripting and Dockerized ZoKrates commands. A produc
 - Potentially store verification keys or credential commitments on-chain, so that anyone can verify proofs without centralized trust.
 - Keep secret credentials and heavy computation off-chain, thus preserving privacy and reducing costs. The proofs themselves, however, can be verified against on-chain references (like Merkle roots or cryptographic commitments) that ensure credentials haven’t been revoked or modified.
 
-###Revocation and Lifecycle Management:
+### Revocation and Lifecycle Management:
 No revocation logic exists in this PoC. In a real-world scenario:
 - On-chain data structures (e.g., Merkle trees, accumulators) could store commitments to valid credentials.
 - Revocation updates would be published on-chain, ensuring a global, tamper-proof state of which credentials remain valid.
