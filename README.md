@@ -40,16 +40,16 @@ OPENAI_API_KEY=your_openai_api_key
 5. you need to create a slack app and add it to the channel you want to post to.
 
 	1.	Create a Slack App:
-	•	Go to https://api.slack.com/apps and click “Create New App”.
-	•	Choose “From scratch” and give it a name and select a workspace where you have permission to install apps.
+	- Go to https://api.slack.com/apps and click “Create New App”.
+	- Choose “From scratch” and give it a name and select a workspace where you have permission to install apps.
 	2.	Configure Bot User and Scopes:
-	•	In the app configuration, go to “Basic Information” → “Add features and functionality” and enable a Bot User if not already created.
-	•	Navigate to “OAuth & Permissions” and add the required scopes under “Bot Token Scopes”. At minimum, add chat:write to let the bot post messages. If you need to read channel history or other features, add those scopes as well.
+	- In the app configuration, go to “Basic Information” → “Add features and functionality” and enable a Bot User if not already created.
+	- Navigate to “OAuth & Permissions” and add the required scopes under “Bot Token Scopes”. At minimum, add chat:write to let the bot post messages. If you need to read channel history or other features, add those scopes as well.
 	3.	Install the App to Your Workspace:
-	•	In “OAuth & Permissions”, click “Install App to Workspace” and authorize the requested permissions.
-	•	Once installed, Slack will provide you with a “Bot User OAuth Token”. This is your SLACK_BOT_TOKEN.
+	- In “OAuth & Permissions”, click “Install App to Workspace” and authorize the requested permissions.
+	- Once installed, Slack will provide you with a “Bot User OAuth Token”. This is your SLACK_BOT_TOKEN.
 	4.	Invite the Bot to Your Channel:
-	•	In Slack, go to the channel where you want to post messages and invite the bot by typing: `/invite @<your_slack_app>`
+	- In Slack, go to the channel where you want to post messages and invite the bot by typing: `/invite @<your_slack_app>`
 
 ## How to run
 
