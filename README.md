@@ -80,35 +80,40 @@ This will start the CrewAI agent and post to Slack. Take a look at the input in 
 ## Closing Remarks
 
 This proof-of-concept lays out a foundational pattern for privacy-preserving delegation, combining zero-knowledge proofs with a Slack integration. Despite successfully demonstrating the concept, it remains a simplified model with several notable limitations:
-	•	Credential Representation:
-The current “credential” is just a JSON entry mapping a public_value to actions. In a production environment, these credentials would be formal Verifiable Credentials (VCs), signed by a trusted issuer’s DID key. Such credentials, stored off-chain, would provide authenticity, integrity, and interoperability, enabling verifiers to cryptographically confirm who issued them.
-	•	DID Integration and Verification:
-DIDs in this PoC are simple strings without actual resolution. A real system would leverage decentralized identity frameworks and DID resolvers to verify issuer DIDs and associated public keys. This DID infrastructure would generally run off-chain, while references to DID documents or VC registries might be anchored on-chain for tamper-resistant transparency.
-	•	ZK Proof Generation and Verification:
-We currently rely on manual scripting and Dockerized ZoKrates commands. A production system could:
-	•	Automate these steps as services, allowing agents to autonomously produce and verify proofs.
-	•	Potentially store verification keys or credential commitments on-chain, so that anyone can verify proofs without centralized trust.
-	•	Keep secret credentials and heavy computation off-chain, thus preserving privacy and reducing costs. The proofs themselves, however, can be verified against on-chain references (like Merkle roots or cryptographic commitments) that ensure credentials haven’t been revoked or modified.
-	•	Revocation and Lifecycle Management:
-No revocation logic exists in this PoC. In a real-world scenario:
-	•	On-chain data structures (e.g., Merkle trees, accumulators) could store commitments to valid credentials.
-	•	Revocation updates would be published on-chain, ensuring a global, tamper-proof state of which credentials remain valid.
-	•	Agents would produce ZK proofs referencing these on-chain commitments, while all sensitive logic (like handling the user’s secret) stays off-chain.
-	•	Scalability and Interoperability:
-While our PoC is minimal, a full production architecture would consider:
-	•	On-chain anchoring of verification keys or credential state for global verifiability.
-	•	Off-chain services or microservices automating proof generation and verification requests.
-	•	Standardized credential formats and DID methods enabling interoperability with other decentralized identity and authorization systems.
 
-On-Chain vs. Off-Chain Summary:
-	•	On-Chain:
-	•	Anchoring verification keys or Merkle roots of valid credentials.
-	•	Storing cryptographic commitments or references for revocation and credential state, ensuring tamper resistance.
-	•	Off-Chain:
-	•	Holding secret credentials privately.
-	•	Running heavy computations for generating and verifying proofs.
-	•	Managing the full DID resolution process and retrieving Verifiable Credentials.
-	•	Interacting with Slack and other external services.
+### Credential Representation:
+The current “credential” is just a JSON entry mapping a public_value to actions. In a production environment, these credentials would be formal Verifiable Credentials (VCs), signed by a trusted issuer’s DID key. Such credentials, stored off-chain, would provide authenticity, integrity, and interoperability, enabling verifiers to cryptographically confirm who issued them.
+
+###DID Integration and Verification:
+DIDs in this PoC are simple strings without actual resolution. A real system would leverage decentralized identity frameworks and DID resolvers to verify issuer DIDs and associated public keys. This DID infrastructure would generally run off-chain, while references to DID documents or VC registries might be anchored on-chain for tamper-resistant transparency.
+
+### ZK Proof Generation and Verification:
+We currently rely on manual scripting and Dockerized ZoKrates commands. A production system could:
+	- Automate these steps as services, allowing agents to autonomously produce and verify proofs.
+	- Potentially store verification keys or credential commitments on-chain, so that anyone can verify proofs without centralized trust.
+	- Keep secret credentials and heavy computation off-chain, thus preserving privacy and reducing costs. The proofs themselves, however, can be verified against on-chain references (like Merkle roots or cryptographic commitments) that ensure credentials haven’t been revoked or modified.
+
+###Revocation and Lifecycle Management:
+No revocation logic exists in this PoC. In a real-world scenario:
+	- On-chain data structures (e.g., Merkle trees, accumulators) could store commitments to valid credentials.
+	- Revocation updates would be published on-chain, ensuring a global, tamper-proof state of which credentials remain valid.
+	- Agents would produce ZK proofs referencing these on-chain commitments, while all sensitive logic (like handling the user’s secret) stays off-chain.
+
+### Scalability and Interoperability:
+While our PoC is minimal, a full production architecture would consider:
+	- On-chain anchoring of verification keys or credential state for global verifiability.
+	- Off-chain services or microservices automating proof generation and verification requests.
+	- Standardized credential formats and DID methods enabling interoperability with other decentralized identity and authorization systems.
+
+### On-Chain vs. Off-Chain Summary:
+- On-Chain:
+	- Anchoring verification keys or Merkle roots of valid credentials.
+	- Storing cryptographic commitments or references for revocation and credential state, ensuring tamper resistance.
+- Off-Chain:
+	- Holding secret credentials privately.
+	- Running heavy computations for generating and verifying proofs.
+	- Managing the full DID resolution process and retrieving Verifiable Credentials.
+	- Interacting with Slack and other external services.
 
 ### In Summary:
 This PoC provides a glimpse of how zero-knowledge proofs, decentralized identity, and service integrations (like Slack) can come together to create a privacy-preserving, trust-minimized delegation system. Moving to a production-ready architecture would involve integrating robust DID frameworks, verifiable credential standards, revocation mechanisms, and carefully dividing on-chain and off-chain responsibilities to achieve both integrity and efficiency. Such a system would scale to more complex use cases, ensuring that only properly authorized entities carry out delegated tasks without sacrificing user privacy or security.
