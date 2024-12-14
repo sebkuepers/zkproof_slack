@@ -89,21 +89,21 @@ DIDs in this PoC are simple strings without actual resolution. A real system wou
 
 ### ZK Proof Generation and Verification:
 We currently rely on manual scripting and Dockerized ZoKrates commands. A production system could:
-	- Automate these steps as services, allowing agents to autonomously produce and verify proofs.
-	- Potentially store verification keys or credential commitments on-chain, so that anyone can verify proofs without centralized trust.
-	- Keep secret credentials and heavy computation off-chain, thus preserving privacy and reducing costs. The proofs themselves, however, can be verified against on-chain references (like Merkle roots or cryptographic commitments) that ensure credentials haven’t been revoked or modified.
+- Automate these steps as services, allowing agents to autonomously produce and verify proofs.
+- Potentially store verification keys or credential commitments on-chain, so that anyone can verify proofs without centralized trust.
+- Keep secret credentials and heavy computation off-chain, thus preserving privacy and reducing costs. The proofs themselves, however, can be verified against on-chain references (like Merkle roots or cryptographic commitments) that ensure credentials haven’t been revoked or modified.
 
 ###Revocation and Lifecycle Management:
 No revocation logic exists in this PoC. In a real-world scenario:
-	- On-chain data structures (e.g., Merkle trees, accumulators) could store commitments to valid credentials.
-	- Revocation updates would be published on-chain, ensuring a global, tamper-proof state of which credentials remain valid.
-	- Agents would produce ZK proofs referencing these on-chain commitments, while all sensitive logic (like handling the user’s secret) stays off-chain.
+- On-chain data structures (e.g., Merkle trees, accumulators) could store commitments to valid credentials.
+- Revocation updates would be published on-chain, ensuring a global, tamper-proof state of which credentials remain valid.
+- Agents would produce ZK proofs referencing these on-chain commitments, while all sensitive logic (like handling the user’s secret) stays off-chain.
 
 ### Scalability and Interoperability:
 While our PoC is minimal, a full production architecture would consider:
-	- On-chain anchoring of verification keys or credential state for global verifiability.
-	- Off-chain services or microservices automating proof generation and verification requests.
-	- Standardized credential formats and DID methods enabling interoperability with other decentralized identity and authorization systems.
+- On-chain anchoring of verification keys or credential state for global verifiability.
+- Off-chain services or microservices automating proof generation and verification requests.
+- Standardized credential formats and DID methods enabling interoperability with other decentralized identity and authorization systems.
 
 ### On-Chain vs. Off-Chain Summary:
 - On-Chain:
