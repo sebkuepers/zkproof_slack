@@ -25,8 +25,8 @@ docker pull zokrates/zokrates
 3. You need to clone the repository and install the dependencies with CrewAI.
 
 ```bash
-git clone https://github.com/crewai-ai/zkproof-slack.git
-cd zkproof-slack
+git clone https://github.com/sebkuepers/zkproof_slack
+cd zkproof_slack
 crewai install
 ```
 
